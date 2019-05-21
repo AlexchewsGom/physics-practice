@@ -4,8 +4,11 @@ cc_library(
     hdrs = ["profile.h"],
 )
 
-cc_binary(
-    name = "main",
-    srcs = ["main.cc"],
-    deps = [":profile"],
+cc_test(
+    name = "profile_test",
+    srcs = ["profile_test.cc"],
+    deps = [
+        ":profile",
+        "//third_party/google/googletest",
+    ]
 )
