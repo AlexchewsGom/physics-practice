@@ -8,7 +8,7 @@ const double kEpsilon = 1e-9;
 TEST(Profile, Test) {
   // params
   const Profile::ProfilePoint current = {0., 0.};
-  const Profile::ProfilePoint goal = {2., 0.};
+  const Profile::ProfilePoint goal = {1., 0.};
 
   Profile profile(current);
   profile.SetGoal(goal);
@@ -29,6 +29,6 @@ TEST(Profile, Test) {
     csv << i << "," << point.position << "," << point.velocity << "\n";
   }
 
-  EXPECT_NEAR(profile.GetPoint(t).position, goal.position, kEpsilon);
-  EXPECT_NEAR(profile.GetPoint(t).velocity, goal.velocity, kEpsilon);
+  EXPECT_NEAR(profile.GetPoint(t - kEpsilon).position, goal.position, kEpsilon * 2);
+  EXPECT_NEAR(profile.GetPoint(t - kEpsilon).velocity, goal.velocity, kEpsilon * 2);
 }
