@@ -41,7 +41,7 @@ const Profile::ProfilePoint Profile::GetPoint(double t) {
 
   if (t < end_accel_t_) {
     ret.velocity += t * kMaxAcceleration;
-    ret.position =
+    ret.position +=
         current_.velocity * t + 0.5 * kMaxAcceleration * t * t; // vt + 0.5at^2
   } else if (t < end_const_t_) {
     ret.velocity = kMaxVelocity;
@@ -52,13 +52,14 @@ const Profile::ProfilePoint Profile::GetPoint(double t) {
     double time_left = end_deccel_t_ - t;
     ret.velocity =
         goal_.velocity +
-        (time_left)*kMaxAcceleration; // Decceleration towards goal from
+        time_left * kMaxAcceleration; // Decceleration towards goal from
                                       // whatever peak was reached
     ret.position =
         goal_.position - (goal_.velocity * time_left +
                           0.5 * kMaxAcceleration * time_left * time_left);
   } else {
-    return goal_;
+    ret = goal_;
+    std::cout << goal_.position << std::endl;
   }
-  return ret;
+  return backwards_ ? ProfilePoint({-ret.position, -ret.velocity}) : ret;
 }
