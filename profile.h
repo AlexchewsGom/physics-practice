@@ -1,6 +1,8 @@
 #ifndef PROFILE_H_
 #define PROFILE_H_
 
+#include <cmath>
+
 constexpr double kMaxVelocity = 1.0;
 constexpr double kMaxAcceleration = 1.0;
 

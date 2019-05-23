@@ -1,5 +1,4 @@
 #include "profile.h"
-#include <cmath>
 #include <iostream>
 
 void Profile::CalculateTime() {
